@@ -24,14 +24,52 @@ Need to customize or test with your own input? The extension lets you modify the
 ### 4. Multi-Language Support  
 Currently supports C++ and Python. We plan to expand to more languages like Java and JavaScript in the future!
 
+### 5. Supports all input formats, including Vectors and Matrices.
+The first line of the input file specifies the dimensions for all `Vectors` and `Matrices`:
+-  `n` for `Vectors`.
+-  `n, m` for `Matrices`.
+Users are advised to refer to the `input.txt` file to ensure `proper formatting` of test cases.
 
 ---
 
 ## 🚀 Installation
 
+- **Installing Dependencies**
+1. Clone the repository:
+   ``` 
+   git clone https://github.com/S0r4-0/leet-cph.git 
+   ```
+
+2. Navigate to the Cloned repository:
+   ```
+   cd leet-cph
+   ```
+
+3. Ensure npm is installed
+   ```
+   npm -v
+   ```
+   If npm is not installed, you can install it by following the instructions [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
+   
+4. Install the required dependencies using npm:
+   ```
+   npm install
+   ```
+   
+- **Installing Extension**
 1. Open VS Code and go to the Extensions tab.
-2. Search for **leet-cph** and hit Install.
+2. Search for **leet-cph** and hit install.
 3. You're ready to start testing LeetCode solutions with ease!
+4. The cloned repository can be uninstalled now
+
+- **Developer Setup**
+1. Open repository in vscode
+   ```
+   code .
+   ```
+
+2. Start Debugging: `Ctrl+F5`
+3. The extension can now be tested in the development VS Code window.
 
 ---
 
@@ -44,19 +82,20 @@ Currently supports C++ and Python. We plan to expand to more languages like Java
 4. Alternatively, use the keyboard shortcut: `Ctrl+Alt+A`.
 5. Enter the **LeetCode problem URL** (e.g., `https://leetcode.com/problems/two-sum`).
 6. Select your programming language (`C++` or `Python`).
-7. The extension creates:
-   - A code file (`<problem_name>.<extension>`).
-   - Test Cases are stored under folder `.leet-cph\<problem_name\` as `input_<num>.txt` and `output_<num>.txt`.  
+7. The extension will:
+   - Create a code file (`<problem_name>.<extension>`).
+   - Store test cases in the `.leet-cph\<problem_name\` folder as `input_<num>.txt` and `output_<num>.txt`.  
 
 ### Run Test Cases
-1. Write your solution in the generated file.
+1. Write your solution in the generated file after properly  reviewing the the `input_<num>.txt` files.
 2. Open the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P` on macOS).
 3. Run the command: `CPH: Run Test Cases`.
 4. Alternatively, use the keyboard shortcut: `Ctrl+Alt+B`
 5. The extension will:
    - Execute your code for each input test case.
-   - Compare your code's output with the expected output and give verdict.
+   - Compare your code's output with the expected output.
    - Display the results in the output channel.
+   - Provide a **verdict** (e.g., Passed, Failed).
 
 ### Modify Test Cases
 1. Navigate to the `.leet-cph/<problem_name>/` folder.
@@ -78,6 +117,7 @@ Currently supports C++ and Python. We plan to expand to more languages like Java
 
 ## 📋 Requirements
 
+- Ensure `Node` and `npm` is installed in the system. 
 - Ensure that the language you're coding in (`Python` or `C++`) is installed on your system.
 
 ---
@@ -85,7 +125,7 @@ Currently supports C++ and Python. We plan to expand to more languages like Java
 ## 💡 Future Enhancements
 
 - Extend Language support to include Java, JavaScript etc.
-- Allow input array/matrix size specification for better usability and readability.
+- Resolve issues with the extension bundle not properly including dependencies, requiring users to have them installed on their devices.
 
 ---
 

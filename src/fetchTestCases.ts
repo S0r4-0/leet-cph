@@ -2,6 +2,7 @@ import path from "path";
 import puppeteer from "puppeteer";
 import * as vscode from 'vscode';
 import fs from 'fs/promises';
+import { cleanData } from "./formatData";
 
 
 export const getTestCases = async (url: string): Promise<void> => {
@@ -51,34 +52,42 @@ export const getTestCases = async (url: string): Promise<void> => {
         
         const inputs: string[] = [];
         const outputs: string[] = [];
+        const additionals: string[] = [];
 
         let inputMatch: RegExpExecArray | null;
         while((inputMatch = inputRegex.exec(content)) !== null){
-            inputs.push(cleanData(inputMatch[1].trim()));
+            inputs.push(cleanData(inputMatch[1].trim(), additionals, true));
         }
-
+        
         let outputMatch: RegExpExecArray | null;
         while((outputMatch = outputRegex.exec(content)) !== null){
-            outputs.push(cleanData(outputMatch[1].trim()));
+            outputs.push(cleanData(outputMatch[1].trim(), additionals, false));
         } 
         
         // Check if inputs and outputs were found
         if (inputs.length === 0 || outputs.length === 0){
             throw new Error("Error fetching test cases: No test cases found.");
         }
-
+        
         
         
         // Define file paths for inputs and outputs
         const finalDirPath = path.join(dirPath, '.leet-cph', problemName);
         console.log("Dir: ", finalDirPath);
         await fs.mkdir(finalDirPath, {recursive: true});
-
+        
+        // Checking the Vector/Matrix Size Fix
+        console.log(`Size Fix: ${additionals}`);
+        
         try{
             // Write inputs and outputs to respective files
             for (let i = 0; i < inputs.length; i++){
                 const inputFilePath = path.join(finalDirPath, `input_${i+1}.txt`);
-                await fs.writeFile(inputFilePath, inputs[i], 'utf8');
+                if (additionals[i]){
+                    await fs.writeFile(inputFilePath, `${additionals[i].trim()}\n${inputs[i]}`, 'utf8');
+                } else {
+                    await fs.writeFile(inputFilePath, inputs[i], 'utf8');
+                }
                 console.log("Inputs: ", inputs);
             }
 
@@ -100,18 +109,3 @@ export const getTestCases = async (url: string): Promise<void> => {
         await browser.close();
     }
 };
-
-function cleanData(rawData: string): string {
-    // Clean and format test cases data for easier parsing
-    let cleaned = rawData
-      .split(/\b[a-zA-Z_0-9]+\s*=\s*/) // Split at variable assignment
-      .filter(part => part.trim() !== "") // Remove empty parts
-      .map(part => part.trim()) // Trim whitespaces
-      .map(part => part
-        .replace(/"/g, '') // Remove double quotes
-        .replace(/[\[\]]/g, '') // Remove brackets
-        .replace(/,/g, ' ') // Replace commas with spaces
-      ).join('\n');
-  
-    return cleaned;
-}

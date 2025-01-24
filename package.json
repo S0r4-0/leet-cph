@@ -1,10 +1,11 @@
 {
   "name": "leet-cph",
-  "displayName": "CPH LeetCode",
+  "displayName": "Leet CPH: LeetCode Competitive Programming Helper",
   "publisher": "S0r4-0",
   "description": "Streamlines problem-solving for LeetCode by automating fetching test cases, compiling code and testing against expected output",
   "version": "0.0.1",
   "license": "MIT",
+  "icon": "icon.png",
   "engines": {
     "vscode": "^1.96.0"
   },
@@ -81,9 +82,9 @@
     "@vscode/test-cli": "^0.0.10",
     "@vscode/test-electron": "^2.4.1",
     "eslint": "^9.16.0",
-    "ts-loader": "^9.5.1",
+    "ts-loader": "^9.5.2",
     "typescript": "^5.7.2",
-    "webpack": "^5.95.0",
+    "webpack": "^5.97.1",
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {

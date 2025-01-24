@@ -23,6 +23,7 @@ export function activate(context: vscode.ExtensionContext) {
 		// Display a message box to the user
 		// vscode.window.showInformationMessage('Hello World from cph-leetcode!');
 
+		// Prompt for LeetCode URL
 		const url = await vscode.window.showInputBox({
 			placeHolder: "Enter the URL of the Leetcode problem",
 			ignoreFocusOut: true,
@@ -35,12 +36,14 @@ export function activate(context: vscode.ExtensionContext) {
 			},
 		});
 
+		// No URL entered
 		if (!url){
 			vscode.window.showErrorMessage("URL is required");
 			return;
 		}
 
 		try{
+			// Fetch Test Cases
 			await getTestCases(url);
 			vscode.window.showInformationMessage("Test cases fetched successfully!");
 			console.log("Current Working Directory: ", process.cwd());
@@ -49,6 +52,7 @@ export function activate(context: vscode.ExtensionContext) {
 			return;
 		}
 
+		// Prompt for File Creation
 		const lang = await vscode.window.showQuickPick(
 			["C++", "Python"],
 			{
@@ -58,11 +62,14 @@ export function activate(context: vscode.ExtensionContext) {
 			}
 		);
 
+		// No File Created
 		if (!lang) {
 			vscode.window.showErrorMessage("New file not created.");
 			return;
 		}
+
 		try{
+			// File Creation
 			const message = await createFile(url, lang);
 			vscode.window.showInformationMessage(message);
 			console.log("File created");
@@ -74,12 +81,14 @@ export function activate(context: vscode.ExtensionContext) {
 
 	const runTestCasesCommand = vscode.commands.registerCommand('cph-leetcode.runTestCases', async () => {
 		const editor = vscode.window.activeTextEditor;
-
+		
+		// A file must be open 
 		if (!editor){
 			vscode.window.showErrorMessage("no file is currently open");
 			return;
 		}
 		
+		// Path and ext
 		const filePath = editor.document.fileName;
 		const fileExt = path.extname(filePath);
 		console.log("File Path: ", filePath);
@@ -90,6 +99,7 @@ export function activate(context: vscode.ExtensionContext) {
 		};
 
 		try{
+			// Run Test Cases
 			await codeExec(filePath, lang[fileExt]);
 
 			console.log("Test cases are running...");
