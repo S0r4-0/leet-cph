@@ -3,7 +3,7 @@
   "displayName": "Leet CPH: LeetCode Competitive Programming Helper",
   "publisher": "S0r4-0",
   "description": "Streamlines problem-solving for LeetCode by automating fetching test cases, compiling code and testing against expected output",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "license": "MIT",
   "icon": "icon.png",
   "engines": {
