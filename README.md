@@ -68,7 +68,7 @@ Users are advised to refer to the `input.txt` file to ensure `proper formatting`
    code .
    ```
 
-2. Start Debugging: `Ctrl+F5`
+2. Start Debugging: `F5`
 3. The extension can now be tested in the development VS Code window.
 
 ---
@@ -126,6 +126,7 @@ Users are advised to refer to the `input.txt` file to ensure `proper formatting`
 
 - Extend Language support to include Java, JavaScript etc.
 - Resolve issues with the extension bundle not properly including dependencies, requiring users to have them installed on their devices.
+- **Add Submission Feature**: Allow users to submit their solutions directly to LeetCode from the extension, streamlining the process without leaving the editor.
 
 ---
 
